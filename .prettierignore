@@ -1,0 +1,11 @@
+# playwright report directories and files
+node_modules/
+.vscode/
+.husky/
+.github/
+
+package-lock.json
+package.json
+**/*.png
+.prettierignore
+.prettierrc
