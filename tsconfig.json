@@ -9,10 +9,13 @@
     "resolveJsonModule": true, // Allows importing JSON files and accessing the data through 'import'
     "paths": {
       "@components/*": [
-        "src/e2e/components/*"
+        "src/components/*"
+      ],
+      "@fixtures/*": [
+        "src/fixtures/*"
       ],
       "@pages/*": [
-        "src/e2e/pages/*"
+        "src/pages/*"
       ],
       "@utilities/*": [
         "src/utilities/*"
@@ -34,7 +37,7 @@
     "noUnusedLocals": true, // Compiler reports an error if a local variable is declared but not used in the function
     "noUnusedParameters": true, // Compiler reports an error if a function contains parameters that are declared but not used
     "strictPropertyInitialization": true, // Ensures that each property declared in a class gets initialized either in constructor or by a default value
-    "strict": true, // Enables a stricter type-checking mode and activates a range of type-checking complier options to catch potential issues early in the development process
+    "strict": true, // Enables a stricter type-checking mode and activates a range of type-checking compiler options to catch potential issues early in the development process
     // With above 'strict' option set to True, all the below strict options are activated to true by default
     // Explicit mention here is to update these options as per your project needs
     "strictNullChecks": true, // Enforces proper handling of null and undefined values to prevent common null-reference errors
@@ -47,8 +50,7 @@
     "commitlint.config.mjs",
     "eslint.config.mjs",
     "playwright.config.ts",
-    "src/**/*.ts",
-    "tests-examples/demo-todo-app.spec.ts" // temporary here for demo purpose
+    "src/**/*.ts", "src/e2e/tests/API/order.api.test.ts"
   ],
   "exclude": [
     "node_modules"

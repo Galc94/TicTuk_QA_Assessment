@@ -1,21 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
-import { CI } from '@utilities/constants';
-
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+import { BASE_URL } from '@utilities/constants';
+import { CI } from '@utilities/environment';
 
 export default defineConfig({
-  timeout: 120000, // Two minutes
+  outputDir: 'playwright/reports',
+  timeout: 60000, // One minutes
   expect: {
-    timeout: 60000, // Sixty seconds
+    timeout: 10000, // Ten seconds
   },
   testDir: './src/e2e/tests',
-  fullyParallel: false,
+  fullyParallel: false, //false because it doesn't make sense. We only have 1 scenario
   forbidOnly: CI,
   retries: CI ? 1 : 0,
   workers: CI ? 4 : undefined,
@@ -24,47 +18,23 @@ export default defineConfig({
     ['json', { outputFile: 'playwright/reports/results.json' }],
   ],
   use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: BASE_URL,
+    launchOptions: { 
+      slowMo: 0, 
+      headless: false 
+    },
     screenshot: 'only-on-failure',
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
   },
 
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
-    /* Test against mobile viewport. */
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
-
-    /* Test against branded browsers. */
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+      use: { 
+        ...devices['Desktop Chrome'], 
+        channel: 'chrome', 
+      },
+      testMatch: '**/CartFlow/**',
     },
   ],
 });

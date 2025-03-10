@@ -1,9 +1,35 @@
 # TicTuk_QA_Assessment
 
+## Task Completion Timestamps
+
+- **Start Time:** YYY-MM-DD AM/PM (UTC)
+- **End Time:** YYY-MM-DD AM/PM (UTC)
+
+## Final Order Number
+
+- **Order Number:** [Order Number]
+
 ## Setting up
 
 - Install node and playwright dependencies: `npm i && npx playwright install --with-deps`
   - You only need to run `npm i` when updating dependencies
+
+### Core Environment Variables
+
+You will need to set up a series of environment variables to get this project to work.
+
+Create the `playwright\environment\.env` file. The file minimally must have the following attributes. use the .env.example as guide
+
+```bash
+BASE_URL = https://staging.njs-qa1.lji.li/
+STORE_ADDRESS = 700 Wilshire Blvd, Santa Monica, CA 90401, USA.
+CARDHOLDER_NAME = APRO
+CREDIT_CARD_NUMBER = 5031 7557 3453 0604
+EXPIRATION_DATE = 11/25
+CVV = 123
+RUT = 11.111.111-1
+API_ENDPOINT = https://mng-qa1.lji.li/api/getReportNew/
+```
 
 ## running tests
 
@@ -53,14 +79,15 @@ It is recommended to execute test after any playwright version upgrade.
 
 As part of the best practices I have included the usage of rules in playwright to facilitate alignment with others QA if applicable, they were defined by myself according my experience but it is very negotiable with the team to decide whether some rules could be modified, removed or even more could be added.
 
-to check the rules applied go to [eslint.config.mjs](eslint.config.mjs).
-more doc about playwright rules and recommended rules from [eslint-plugin-playwright](https://github.com/playwright-community/eslint-plugin-playwright#readme)
+- to check the rules applied go to [eslint.config.mjs](eslint.config.mjs).
+- consider that jsdoc is also included as part of best practices.
+- more doc about playwright rules and recommended rules from [eslint-plugin-playwright](https://github.com/playwright-community/eslint-plugin-playwright#readme)
 
-### playwright browser
+### additional notes
 
-this is not a common practice but just for showing skill on how playwright can run test against different browsers, I have enable a list of browsers to run the same tests:
-- chromium
-- firefox
-- webkit
-- Mobile chrome
-- Mobile Safari
+- I am using playwright report due to simplicity, it is being generated in  `playwright\reports\` in 2 formats, HTML and JSON.
+- in .env file constant are defined with default values according Test Scenario as mentioned previously in `Core Environment Variables`, this step is mandatory before executing the code avoid failures.
+- setup and teardown are not used in this example since they are no need of login or multiple Test scenarios.
+- CI flow was added just to show its usage since this requirement seems to be interesting for the role, but it is not used due to missing github actions definition and also for simplicity.
+- by default, headless mode is false and slow motion is set to cero but they could be manually updated in playwright config file to enable headless or debug with slow Motion, as tester preference (by the ay, headless is usually enabled in CI).
+- by experience, there is no better strategy for waiting patterns in playwright than just for a locator to not be visible.
