@@ -25,6 +25,7 @@ export class PersonalizeYourItem extends BaseComponent {
   }
 
   async AddComplexToCart() {
+    //check only first item in both cases
     if (await this.requiredSection.isVisible({ timeout: 2000 })) {
       await this.singleSelect1.first().check();
       await this.multipleSelect1.first().check();

@@ -11,7 +11,6 @@ export class OrderDetails extends BaseComponent {
 
   async GetOrderNumber() {
     const od = await this.orderNumber.textContent();
-    // const modifiedOd = od?.substring(1);
     return od?.substring(1);
   }
 }

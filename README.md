@@ -2,12 +2,12 @@
 
 ## Task Completion Timestamps
 
-- **Start Time:** YYY-MM-DD AM/PM (UTC)
-- **End Time:** YYY-MM-DD AM/PM (UTC)
+- **Start Time:** 2025-03-09 AM (UTC)
+- **End Time:** 2015-03-10 AM (UTC)
 
 ## Final Order Number
 
-- **Order Number:** [Order Number]
+- **Order Number:** 4374934
 
 ## Setting up
 
@@ -22,9 +22,13 @@ Create the `playwright\environment\.env` file. The file minimally must have the 
 
 ```bash
 BASE_URL = https://staging.njs-qa1.lji.li/
-STORE_ADDRESS = 700 Wilshire Blvd, Santa Monica, CA 90401, USA.
+STORE_ADDRESS = 700 Wilshire Blvd, Santa Monica, CA 90401, USA
+CLIENT_NAME = test
+CLIENT_PHONE = +299520081
+CLIENT_EMAIL = a@A.com
+CLIENT_ADDRESS_COMMENT = test
 CARDHOLDER_NAME = APRO
-CREDIT_CARD_NUMBER = 5031 7557 3453 0604
+CREDIT_CARD_NUMBER = 5031755734530604
 EXPIRATION_DATE = 11/25
 CVV = 123
 RUT = 11.111.111-1

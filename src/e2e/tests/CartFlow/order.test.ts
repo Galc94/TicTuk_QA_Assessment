@@ -56,7 +56,7 @@ test.describe('Order Test Suite', () => {
             `'${firstItem.itemName}' was added to your cart`,
           );
           console.log('Added Item to cart: ', firstItem.itemName);
-          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0); // await alert is gone
+          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0);
         } else {
           throw new Error('First item not found or confirmation alert message was updated');
         }
@@ -67,31 +67,31 @@ test.describe('Order Test Suite', () => {
             `'${lastItem.itemName}' was added to your cart`,
           );
           console.log('Added Item to cart: ', lastItem.itemName);
-          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0); // await alert is gone
+          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0);
         } else {
           throw new Error('Last item not found or confirmation alert message was updated');
         }
         const ComplexItemDesired1 = await webStore.orderSummary.findItem(undefined, 'Required Inner Section');
         if (ComplexItemDesired1) {
           await webStore.orderSummary.AddToCart(ComplexItemDesired1.itemCartButton);
-          await webStore.personalizeYourItemPopup.AddComplexToCart(); //check first and last select options
+          await webStore.personalizeYourItemPopup.AddComplexToCart(); 
           expect(await webStore.orderSummary.ItemConfirmationAlert()).toContain(
             `'${ComplexItemDesired1.itemName}' was added to your cart`,
           );
           console.log('Added Item to cart: ', ComplexItemDesired1.itemName);
-          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0); // await alert is gone
+          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0);
         } else {
           throw new Error('Required Inner Section item not found or confirmation alert message was updated');
         }
         const ComplexItemDesired2 = await webStore.orderSummary.findItem(undefined, 'AU-MENU-ITEMS Complex Item - 2');
         if (ComplexItemDesired2) {
           await webStore.orderSummary.AddToCart(ComplexItemDesired2.itemCartButton);
-          await webStore.personalizeYourItemPopup.AddComplexToCart(); //check first and last select options
+          await webStore.personalizeYourItemPopup.AddComplexToCart();
           expect(await webStore.orderSummary.ItemConfirmationAlert()).toContain(
             `'${ComplexItemDesired2.itemName}' was added to your cart`,
           );
           console.log('Added Item to cart: ', ComplexItemDesired2.itemName);
-          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0); // await alert is gone
+          await expect(webStore.orderSummary.confirmationAlert).toHaveCount(0);
         } else {
           throw new Error('AU-MENU-ITEMS Complex Item - 2 not found or confirmation alert message was updated');
         }

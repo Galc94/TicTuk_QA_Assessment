@@ -4,7 +4,7 @@ import { CI } from '@utilities/environment';
 
 export default defineConfig({
   outputDir: 'playwright/reports',
-  timeout: 60000, // One minutes
+  timeout: 60000, // One minute
   expect: {
     timeout: 10000, // Ten seconds
   },

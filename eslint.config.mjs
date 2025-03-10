@@ -26,7 +26,6 @@ export default typescriptEslint.config(
   },
   {
     rules: {
-
       //typescript-eslint rules
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/prefer-for-of': 'warn',
