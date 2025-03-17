@@ -74,7 +74,7 @@ test.describe('Order Test Suite', () => {
         const ComplexItemDesired1 = await webStore.orderSummary.findItem(undefined, 'Required Inner Section');
         if (ComplexItemDesired1) {
           await webStore.orderSummary.AddToCart(ComplexItemDesired1.itemCartButton);
-          await webStore.personalizeYourItemPopup.AddComplexToCart(); 
+          await webStore.personalizeYourItemPopup.AddComplexToCart();
           expect(await webStore.orderSummary.ItemConfirmationAlert()).toContain(
             `'${ComplexItemDesired1.itemName}' was added to your cart`,
           );

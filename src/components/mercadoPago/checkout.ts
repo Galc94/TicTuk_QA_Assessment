@@ -1,13 +1,12 @@
 import BaseComponent from '@components/baseComponent';
-import { expect, type Locator, type Page } from '@playwright/test';
+import { expect, FrameLocator, type Locator, type Page } from '@playwright/test';
 
 export class Checkout extends BaseComponent {
   readonly creditCard: Locator;
-  readonly cardNumberIframe: string;
-  readonly cardNumber: string;
-  readonly cardHolderName: string;
-  readonly expirationDate: string;
-  readonly ccv: string;
+  readonly cardNumberIframe: FrameLocator;
+  readonly expirationDateIframe: FrameLocator;
+  readonly securityCodeIframe: FrameLocator;
+  readonly cardHolderName: Locator;
   readonly continueButton: Locator;
   readonly rutTextbox: Locator;
   readonly payButton: Locator;
@@ -15,11 +14,10 @@ export class Checkout extends BaseComponent {
   constructor(page: Page) {
     super(page);
     this.creditCard = page.getByRole('button', { name: 'Tarjeta de crédito' });
-    this.cardNumberIframe = 'iframe[name="cardNumber"]';
-    this.cardNumber = '#card_number';
-    this.cardHolderName = '#fullname';
-    this.expirationDate = '#expiration_date';
-    this.ccv = '#cvv';
+    this.cardNumberIframe = page.locator('iframe[name="cardNumber"]').contentFrame();
+    this.expirationDateIframe = page.locator('iframe[name="expirationDate"]').contentFrame();
+    this.securityCodeIframe = page.locator('iframe[name="securityCode"]').contentFrame();
+    this.cardHolderName = page.locator('#fullname');
     this.continueButton = page.getByText('Continuar');
     this.rutTextbox = page.locator('#number');
     this.payButton = page.getByText('Pagar', { exact: true });
@@ -30,16 +28,11 @@ export class Checkout extends BaseComponent {
   }
 
   async FillInCreditCardDetails(cardNumber: string, cardHolderName: string, expirationDate: string, ccv: string) {
-    // needed keyboard type function to enter text in those textbox within iframe
     await expect(this.creditCard).toHaveCount(0);
-    await this.page.click(this.cardNumber);
-    await this.page.keyboard.type(cardNumber);
-    await this.page.click(this.cardHolderName);
-    await this.page.keyboard.type(cardHolderName);
-    await this.page.click(this.expirationDate);
-    await this.page.keyboard.type(expirationDate);
-    await this.page.click(this.ccv);
-    await this.page.keyboard.type(ccv);
+    await this.cardNumberIframe.getByRole('textbox').fill(cardNumber);
+    await this.cardHolderName.fill(cardHolderName);
+    await this.expirationDateIframe.getByRole('textbox').fill(expirationDate);
+    await this.securityCodeIframe.getByRole('textbox').fill(ccv);
   }
 
   async Continue() {
